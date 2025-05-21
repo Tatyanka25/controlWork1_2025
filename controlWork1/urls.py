@@ -7,7 +7,7 @@ app_name = "controlWork1"
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
-    path('main_page/', views.main_page, name='main_page'),
+    path('', views.main_page, name='main_page'),
     path('page1/', views.page1, name='page1'),
     path('page2/', views.page2, name='page2'),
     path('page2/<str:str_value>/<str:city_value>/', views.page2, name='page2_with_data'),
