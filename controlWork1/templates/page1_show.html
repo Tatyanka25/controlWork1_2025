@@ -1,0 +1,37 @@
+{% extends 'main_page.html' %}
+{% load static %}
+
+{% block title %}
+    {% if cur_show %}{{ cur_show.title }}{% elif page_title %}{{ page_title }}{% else %}Детали шоу{% endif %}
+{% endblock %}
+
+    {% block css %}
+    <link href="{% static 'controlWork1Css/page1_show.css' %}" rel="stylesheet">
+    {% endblock %}
+
+    {% block content %}
+    
+    <div class='container mt-4'>
+    {% if error %}
+    <h2 style="color: red;">{{ error }}</h2>
+    {% else %}
+    <div class='container'>
+        <h1>{{cur_show.title}}</h1>
+        <hr>
+        <div class="container text-left">
+          <div class="row">
+            <div class="col">
+                <img src="{{ cur_show.img.url }}", width="100%">
+                <h2 class="text-center">{{cur_show.info}}</h2>
+                <p>{{cur_show.all_info}}</p>
+                <p><b>Цена: </b>{{cur_show.price}} руб.</p>
+                <a href="{% url 'controlWork1:page1' %}"><button type="button" class="btn btn-outline-dark">Назад</button></a>
+            </div>
+          </div>
+          <hr>
+        </div>
+    </div>
+    {% endif %}
+    </div>
+
+    {% endblock %}

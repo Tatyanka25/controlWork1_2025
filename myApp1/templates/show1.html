@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация о знаке зодиака</title>
+</head>
+<body>
+    {% if error %}
+    <h2 style="color: red;">{{ error }}</h2>
+    {% else %}
+   <h1>{{cur_sign.title}}</h1>
+   <div>
+    <h2>{{cur_sign.info}}</h2>
+    <p>{{cur_sign.all_info}}</p>
+    <img src="{{cur_sign.img}}", width="200px">
+   </div>
+   {% endif %}
+</body>
+</html>

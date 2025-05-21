@@ -1,0 +1,86 @@
+{% extends 'main_page.html' %}
+{% load static %}
+
+    {% block css %}
+    <link href="{% static 'controlWork1Css/page5.css' %}" rel="stylesheet">
+    {% endblock %}
+
+    {% block content %}
+    <div class='container mt-4'>
+        <h1>Расчет стоимости картины</h1>
+        <hr>
+
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    {% if message.tags == 'success' %} 
+                        <div class="alert alert-success text-center alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                        <div class="alert alert-danger text-center">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            {% for field in form %}
+                <div class="mb-3">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="form-error text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary">Рассчитать стоимость</button>
+        </form>
+        
+        {% if form_submitted_successfully and last_calculation_details and last_calculation_values_list %}
+        <hr>
+        <h3>Результат расчетов</h3>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">Высота</th>
+                <th scope="col">Ширина</th>
+                <th scope="col">Тип холста</th>
+                <th scope="col">Тип материалов</th>
+                <th scope="col">Результат</th>
+            </tr>
+            </thead>
+            <tbody style="border-top: 0px;">
+    
+            <tr>
+                {% for key, value in last_calculation_details.items %}
+                    <td>{{ key }}:{{ value }}</td>
+                {% endfor %}
+            </tr>
+    
+            <tr>
+                {% for item in last_calculation_values_list %}
+                    <td>{{ item }}</td>
+                {% endfor %}
+            </tr>
+    
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+    {% endblock %}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация о знаке зодиака</title>
+</head>
+<body>
+    <ul>
+    {% for i in objects_array %}
+    <li>
+        <h1>{{i.title}}</h1>
+        <p>{{i.info}}</p>
+        <h3><a href="{% url 'myApp1:get_sign_one' i.id %}" class = "btn btn-primary">Подробнее о знаке {{i.title}}</a></h3>
+    </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

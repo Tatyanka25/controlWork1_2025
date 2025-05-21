@@ -1,0 +1,36 @@
+{% extends 'main_page.html' %}
+{% load static %}
+
+{% block title %}
+    {% if cur_ex %}{{ cur_ex.title }}{% elif page_title %}{{ page_title }}{% else %}Детали выставки{% endif %}
+{% endblock %}
+
+{% block css %}
+<link href="{% static 'controlWork1Css/page1_exhibition.css' %}"
+    rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div class='container mt-4'>
+{% if error %}
+<h2 style="color: red;">{{ error }}</h2>
+{% else %}
+<div class='container mt-4'>
+    <h1>{{cur_ex.title}}</h1>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <img src="{{ cur_ex.img.url }}", alt="{{ cur_ex.title }}", width="100%">
+            <h2 class="text-center">{{cur_ex.info}}</h2>
+            <p>{{cur_ex.all_info}}</p>
+            <p><b>Цена: </b>{{cur_ex.price}} руб.</p>
+            <a href="{% url 'controlWork1:page1' %}"><button type="button" class="btn btn-outline-dark">Назад</button></a>
+        </div>
+    </div>
+    <hr>
+</div>
+{% endif %}
+</div>
+
+{% endblock %}

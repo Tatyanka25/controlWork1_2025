@@ -1,0 +1,73 @@
+{% extends 'main_page.html' %}
+{% load static %}
+
+    {% block css %}
+    <link href="{% static 'controlWork1Css/page5.css' %}" rel="stylesheet">
+    {% endblock %}
+
+    {% block content %}
+    <div class='container mt-4'>
+        <h1>Все расчеты</h1>
+        <hr>
+        <h3>Таблица по-умолчанию</h3>
+        {% if objects_values %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <tbody style="border-top: 3.0px;">
+                    <tr>
+                        {% for name in name_list %}
+                            <td><b>{{ name }}</b></td>
+                        {% endfor %}
+                    </tr>
+                    {% for object_dict in objects_values %}
+                        <tr>
+                            {% for key, value in object_dict.items %}
+                                <td>{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <p>Нет данных для "Таблицы по-умолчанию".</p>
+        {% endif %}
+        <hr>
+        <h3>Таблица после фильтрации и сортировки</h3>
+        {% if objects_values_list %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <tbody style="border-top: 3.0px;">
+                    <tr>
+                        {% for name in verbose_name_list %}
+                            <td><b>{{ name }}</b></td>
+                        {% endfor %}
+                    </tr>
+                    {% for item_tuple in objects_values_list %}
+                        <tr>
+                            {% for value in item_tuple %}
+                                <td>{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <p>Нет данных для "Таблицы после фильтрации и сортировки".</p>
+        {% endif %}
+        <hr>
+        {% if statics_val %}
+        <h3>Статистика (по полю "Итоговая стоимость (руб.)" из отфильтрованных данных)</h3>
+        <ul class="list-group mb-3">
+            {% if statics_val.0 is not None %}<li class="list-group-item">Количество: {{ statics_val.0 }}</li>{% endif %}
+            {% if statics_val.1 is not None %}<li class="list-group-item">Среднее: {{ statics_val.1|floatformat:2 }}</li>{% endif %}
+            {% if statics_val.2 is not None %}<li class="list-group-item">Минимум: {{ statics_val.2 }}</li>{% endif %}
+            {% if statics_val.3 is not None %}<li class="list-group-item">Максимум: {{ statics_val.3 }}</li>{% endif %}
+            {% if statics_val.4 is not None %}<li class="list-group-item">Сумма: {{ statics_val.4 }}</li>{% endif %}
+        </ul>
+        {% else %}
+        <p class="mt-3">Статистика недоступна.</p>
+        {% endif %}
+    </div>
+    {% endblock %}

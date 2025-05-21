@@ -1,0 +1,31 @@
+{% extends 'main_page.html' %}
+{% load static %}
+
+    {% block css %}
+    <link href="{% static 'controlWork1Css/page6.css' %}" rel="stylesheet">
+    {% endblock %}
+
+    {% block content %}
+    <div class='container mt-4'>
+        <h1>Галерея картин</h1>
+        <hr>
+        {% for i in galary %}
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="row">
+                        <div class="col">
+                            <img src={{i.image_url}} class="rounded" width="100%">
+                        </div>
+                        <div class="col">
+                            <h4>{{i.title}}</h4>
+                            <p>{{i.info}}</p>
+                            <p><b>Автор: </b>{{i.painter_name}}</p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+        {% endfor %}
+    {% endblock %}

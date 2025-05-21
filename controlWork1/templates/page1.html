@@ -1,0 +1,90 @@
+{% extends 'main_page.html' %}
+{% load static %}
+
+    {% block css %}
+    <link href="{% static 'controlWork1Css/page1.css' %}" rel="stylesheet">
+    {% endblock %}
+
+    {% block content %}
+    <div class='container mt-4'>
+        <h1>Все мероприятия</h1>
+        <hr>
+        <nav class="nav nav-pills flex-column flex-sm-row justify-content-center custom-nav">
+          <a class="flex-sm-fill text-sm-center nav-link" aria-current="page" href="#exhibitions">Выставки</a>
+          <a class="flex-sm-fill text-sm-center nav-link" href="#shows">Шоупрограмма</a>
+          <a class="flex-sm-fill text-sm-center nav-link" href="#sales">Скидочная программа</a>
+          <form class="d-flex search-form" method="GET" action="{% url 'controlWork1:page1' %}">
+            <input class="form-control me-2" type="search" name="q" placeholder="Поиск по выставкам и шоу..." aria-label="Поиск" value="{{ search_query|default:'' }}">
+            <button class="btn btn-outline-success" type="submit">Найти</button>
+          </form>
+        </nav>
+        <hr>
+        <div class="container text-left">
+          <div class="row">
+            <div class="col">
+              <h2 id="exhibitions">Выставки:</h2>
+              {% if exhibitions %}
+              <div class="list-group">
+                {% for i in exhibitions %}
+                <a class="list-group-item list-group-item-action" href="{% url 'controlWork1:page1_exhibition' i.id %}">{{i.title}}</a>
+                {% endfor %}
+              </div>
+              {% else %}
+                <p>По вашему запросу "{{ search_query }}" выставок не найдено.</p>
+              {% endif %}
+            </div>
+            <div class="col">
+              <img src="{% static 'controlWork1Images/page1_shape1.png' %}", width="100%">
+            </div> 
+          </div>
+          <div class="row">
+            <div class="col">
+              <img src="{% static 'controlWork1Images/page1_shape2.png' %}", width="100%">
+            </div>
+            <div class="col">
+              <h2 id="shows">Шоу программы:</h2>
+              {% if shows %}
+              <div class="list-group">
+                {% for i in shows %}
+                <a class="list-group-item list-group-item-action" href="{% url 'controlWork1:page1_show' i.id %}">{{i.title}}</a>
+                {% endfor %}
+              </div>
+              {% else %}
+                <p>По вашему запросу "{{ search_query }}" шоу программ не найдено.</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="container text-center">
+          <div class="row">
+            <div class="col">
+              <h2 id="sales">Скидочная программа:</h2>
+              <table class="table">
+                <thead>
+                  <tr>
+                    {% for header in sales_headers %}
+                    <th scope="col">{{header}}</th>
+                    {% endfor %}
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in sales %}
+                  <tr>
+                    <th scope="row">{{i.title}}</th>
+                    <td>{{i.discount_percent_value}}%</td>
+                    <td>{{i.required_document}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <hr>
+    </div>
+
+    <footer>
+
+    </footer>
+    {% endblock %}

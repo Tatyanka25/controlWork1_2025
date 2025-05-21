@@ -1,0 +1,35 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+}
+
+hr {
+    color: black;
+    width: 100%;
+    border-width: 1.5rem;
+}
+
+.custom-nav .nav-link {
+    font-weight: 600; /* Устанавливаем жирный шрифт для ссылок */
+    color: #495057; /* Цвет текста */
+    transition: color 0.3s ease; /* Плавное изменение цвета текста */
+}
+
+.custom-nav .nav-link:hover {
+    color: #f51db8; /* Цвет текста при наведении */
+}
+
+footer {
+    background: #343a40;
+    color: white;
+    padding: 6px;
+    text-align: center;
+    width: 100%;
+    margin-top: auto; 
+}

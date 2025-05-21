@@ -1,0 +1,77 @@
+{% extends 'main_page.html' %}
+{% load static %}
+
+    {% block css %}
+    <link href="{% static 'controlWork1Css/page4.css' %}" rel="stylesheet">
+    {% endblock %}
+
+    {% block content %}
+    <div class='container mt-4'>
+        <h1>Я и моя образовательня программа</h1>
+        <hr>
+        <nav class="nav nav-pills flex-column flex-sm-row justify-content-center custom-nav">
+          <a class="flex-sm-fill text-sm-center nav-link" aria-current="page" href="#about_me">Я</a>
+          <a class="flex-sm-fill text-sm-center nav-link" href="#my_program">Образовательная программа</a>
+          <a class="flex-sm-fill text-sm-center nav-link" href="#my_course_mates">Мои сокурсники</a>
+        </nav>
+        <hr>
+          <div class="container text-left">
+            <div class="row row-cols-1">
+              <div class="col-4 col-md-3">
+                <div class="card" id="about_me" style="width: 15rem; height: 32rem;">
+                  <img src="{{my_info.image_url}}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{my_info.name}}</h5>
+                    <p class="card-text">{{my_info.email}}</p>
+                    <p class="card-text">{{my_info.number}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <h2 id="my_program">Образовательная программа</h2>
+              <h4>{{program_info.title}}</h4>
+              <p>{{program_info.description}}</p>
+              <div class="row">
+              <div class="col">
+                <h2>Руководитель программы</h2>
+                <div class="card" style="width: 15rem; height: 23rem;">
+                  <img src="{{program_info.head_image_url}}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{program_info.head_name}}</h5>
+                    <p class="card-text">{{program_info.head_email}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <h2>Менеджер программы</h2>
+                <div class="card" style="width: 15rem; height: 23rem;">
+                  <img src="{{program_info.manager_image_url}}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{program_info.manager_name}}</h5>
+                    <p class="card-text">{{program_info.manager_email}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+              <h2 id="my_course_mates">Мои сокурсники</h2>
+              {% for i in course_mates %}
+              <div class="col-md-3">
+                <div class="card" style="width: 15rem; height: 32rem;">
+                  <img src="{{i.image_url}}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{i.name}}</h5>
+                    <p class="card-text">{{i.email}}</p>
+                    <p class="card-text">{{i.number}}</p>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <hr>
+    </div>
+    {% endblock %}

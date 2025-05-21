@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<ul>
+    {% for movie in movies %}
+    <li>
+        <a href="{% url 'show_one' movie.id %}"><h3>{{movie.name}}-{{movie.rating}}</h3></a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

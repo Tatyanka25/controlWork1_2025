@@ -1,0 +1,41 @@
+{% extends 'main_page.html' %}
+{% load static %}
+
+{% block css %}
+<link href="{% static 'controlWork1Css/page2.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class='container mt-4'>
+  <h1>Задача</h1>
+  <hr>
+  <div class="row">
+    <div class="col">
+      <h4>Введите данные в строку запроса</h4>
+      <p><b>Выставки: </b>
+        {% if exhibition_list %}
+        <ol>
+          {% for i in exhibition_list %}
+          <li>
+            {{i.style}}, {{i.city}}, {{i.month}}
+          </li>
+          {% endfor %}
+        </ol>
+        {% else %}
+        {% endif %}
+      </p>
+      <p><b>Город: </b>{% if city %}{{ city }}{% else %}{% endif %}</p>
+      <p><b>Количество: </b>{% if count %}{{ count }}{% else %}{% endif %}</p>
+      <h5>Данные для проверки:</h5>
+      <ul>
+        {% for test in tests %}
+        <li>{{test}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col">
+      <img src="https://evshadrina.github.io/WebApplications_2025/task4.jpg" style="width: 40rem;">
+    </div>
+  </div>
+</div>
+{% endblock %}
